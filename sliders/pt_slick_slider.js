@@ -141,7 +141,8 @@ function initializeCarousels() {
         cmsItem: '.testimonial-item',
         imageDivClass: '.testimonial',
         arrowPosition: 'bottom', // Move arrows to the bottom
-        speed: 1200,
+        speed: 600,
+        autoplaySpeed: 10000,
         responsiveSettings: [
             {
                 breakpoint: 991,
