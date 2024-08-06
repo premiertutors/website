@@ -98,9 +98,9 @@
   function initializeCarousels() {
     // Carousel 1
     initializeCarousel({
-      targetDiv: '.xxxcarousel',
-      cmsItem: '.xxxtutor-item',
-      imageDivClass: '.xxxtutor-image',
+      targetDiv: '.carousel',
+      cmsItem: '.tutor-item',
+      imageDivClass: '.tutor-image',
       responsiveSettings: [
         {
           breakpoint: 991,
