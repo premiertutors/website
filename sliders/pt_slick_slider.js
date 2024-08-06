@@ -7,11 +7,21 @@
     document.head.appendChild(script);
 })();
 
-function initializeCarousel(options) {
-    var defaultSettings = {
-        targetDiv: '.carousel',
-        cmsItem: '.tutor-item',
-        responsiveSettings: [
+function initializeCarousel(targetDiv, cmsItem) {
+    var $targetDiv = $(targetDiv);
+    var $cmsItems = $(cmsItem);
+
+    // Initialize Slick
+    $targetDiv.slick({
+        dots: false,
+        arrows: true,
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 5000,
+        prevArrow: "<img class='slick-prev' src='https://uploads-ssl.webflow.com/5fe828cda66535ed122d1912/607cd7bce2745da838252992_chevron-left.svg'>",
+        nextArrow: "<img class='slick-next' src='https://uploads-ssl.webflow.com/5fe828cda66535ed122d1912/601cb92b2fe85c3dc00650dc_chevron-right.svg'>",
+        responsive: [
             {
                 breakpoint: 991,
                 settings: {
@@ -21,8 +31,7 @@ function initializeCarousel(options) {
             {
                 breakpoint: 767,
                 settings: {
-                    slidesToShow: 2,
-                    arrows: true
+                    slidesToShow: 2
                 }
             },
             {
@@ -31,67 +40,32 @@ function initializeCarousel(options) {
                     slidesToShow: 1
                 }
             }
-        ],
-        dots: false,
-        accessibility: true,
-        autoplay: true,
-        autoplaySpeed: 5000,
-        speed: 600,
-        infinite: true,
-        arrows: true,
-        prevArrow: "<img class='slick-prev' src='https://uploads-ssl.webflow.com/5fe828cda66535ed122d1912/607cd7bce2745da838252992_chevron-left.svg'>",
-        nextArrow: "<img class='slick-next' src='https://uploads-ssl.webflow.com/5fe828cda66535ed122d1912/601cb92b2fe85c3dc00650dc_chevron-right.svg'>"
-    };
-
-    var settings = { ...defaultSettings, ...options };
-
-    $(window).on('resize', function() {
-        resizeArrows(settings.targetDiv);
+        ]
     });
 
-    $(settings.targetDiv).slick({
-        dots: false,
-        accessibility: settings.accessibility,
-        autoplay: settings.autoplay,
-        autoplaySpeed: settings.autoplaySpeed,
-        speed: settings.speed,
-        infinite: settings.infinite,
-        arrows: settings.arrows,
-        slidesToShow: 2,
-        slidesToScroll: 1,
-        prevArrow: settings.prevArrow,
-        nextArrow: settings.nextArrow,
-        appendArrows: $(settings.targetDiv),
-        responsive: settings.responsiveSettings
+    // Add CMS items to the carousel
+    $cmsItems.each(function() {
+        var $item = $(this).children().first();
+        $targetDiv.slick('slickAdd', $item);
     });
 
-    $(settings.targetDiv).find('.slick-dots').remove();
+    // Resize arrows
+    function resizeArrows() {
+        var height = $targetDiv.find('.tutor-image').first().height();
+        $targetDiv.find('.slick-arrow').css('top', (height / 2 - 15) + 'px');
+    }
 
-    $(settings.cmsItem).each(function(index, element) {
-        var tutorItem = $(this).children();
-        var div = tutorItem[0];
-
-        $(settings.targetDiv).slick('slickAdd', div);
-
-        var isLastElement = index == $(settings.cmsItem).length - 1;
-        if (isLastElement) resizeArrows(settings.targetDiv);
-    });
-}
-
-function resizeArrows(targetDiv) {
-    var height = $(targetDiv).find('.tutor-image').first().height();
-    $(targetDiv).find('.slick-arrow').each(function() {
-        $(this).css('top', (height / 2 - 15) + 'px');
-    });
+    // Call resizeArrows on window resize and after initialization
+    $(window).on('resize', resizeArrows);
+    resizeArrows();
 }
 
 function initializeCarousels() {
-    initializeCarousel({
-        targetDiv: '.carousel',
-        cmsItem: '.tutor-item'
-    });
+    // Initialize carousels here
+    initializeCarousel('.carousel', '.tutor-item');
+    // You can add more carousels here, e.g.:
+    // initializeCarousel('.another-carousel', '.another-cms-item');
 }
 
-$(document).ready(function() {
-    initializeCarousels();
-});
+// Initialize when the DOM is ready
+document.addEventListener('DOMContentLoaded', initializeCarousels);
