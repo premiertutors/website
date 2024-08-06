@@ -98,8 +98,8 @@ function resizeArrows(targetDiv, cmsItem, imageDivClass, arrowPosition) {
             $(this).css({
                 'top': '',
                 'bottom': '10px',
-                'left': '50%',
-                'right': '50%',
+                'left': $(this).hasClass('slick-prev') ? 'calc(50% - 60px)' : 'calc(50% + 20px)',
+                'right': '',
                 'transform': 'translateX(-50%)'
             });
         }
