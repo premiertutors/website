@@ -7,7 +7,6 @@
     document.head.appendChild(script);
 })();
 
-// Core function with default settings
 function initializeCarousel(options) {
     var defaultSettings = {
         targetDiv: '.carousel',
@@ -44,7 +43,6 @@ function initializeCarousel(options) {
         nextArrow: "<img class='slick-next' src='https://uploads-ssl.webflow.com/5fe828cda66535ed122d1912/601cb92b2fe85c3dc00650dc_chevron-right.svg'>"
     };
 
-    // Merge default settings with custom options
     var settings = { ...defaultSettings, ...options };
 
     $(window).on('resize', function() {
@@ -52,22 +50,22 @@ function initializeCarousel(options) {
     });
 
     $(settings.targetDiv).slick({
-        dots: settings.dots,
+        dots: false,
         accessibility: settings.accessibility,
         autoplay: settings.autoplay,
         autoplaySpeed: settings.autoplaySpeed,
         speed: settings.speed,
         infinite: settings.infinite,
         arrows: settings.arrows,
-        appendArrows: settings.targetDiv,
         slidesToShow: 2,
         slidesToScroll: 1,
         prevArrow: settings.prevArrow,
         nextArrow: settings.nextArrow,
         appendArrows: $(settings.targetDiv),
-        appendDots: $(settings.targetDiv),
         responsive: settings.responsiveSettings
     });
+
+    $(settings.targetDiv).find('.slick-dots').remove();
 
     $(settings.cmsItem).each(function(index, element) {
         var tutorItem = $(this).children();
@@ -80,7 +78,6 @@ function initializeCarousel(options) {
     });
 }
 
-// Function to resize arrows
 function resizeArrows(targetDiv) {
     var height = $(targetDiv).find('.tutor-image').first().height();
     $(targetDiv).find('.slick-arrow').each(function() {
@@ -88,11 +85,13 @@ function resizeArrows(targetDiv) {
     });
 }
 
-// Initialize multiple carousels with different settings
 function initializeCarousels() {
-    // Carousel 1
     initializeCarousel({
         targetDiv: '.carousel',
         cmsItem: '.tutor-item'
     });
 }
+
+$(document).ready(function() {
+    initializeCarousels();
+});
