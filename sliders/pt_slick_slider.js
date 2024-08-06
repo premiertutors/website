@@ -117,4 +117,28 @@
         }
       ]
     });
+    initializeCarousel({
+      targetDiv: '.testimonial-carousel',
+      cmsItem: '.testimonial-item',
+      responsiveSettings: [
+        {
+          breakpoint: 991,
+          settings: {
+            slidesToShow: 3
+          }
+        },
+        {
+          breakpoint: 767,
+          settings: {
+            slidesToShow: 2
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1
+          }
+        }
+      ]
+    });
 }
