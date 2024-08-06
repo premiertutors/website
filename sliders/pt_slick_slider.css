@@ -1,0 +1,29 @@
+table {
+    margin: 0px;
+  padding: 0px;
+  min-height: 0px;
+  height: auto;
+}
+  .slick-slide {
+  margin-left:10px;
+  margin-right:10px;
+  }
+  .slick-arrow {
+    z-index: 900;
+  position: absolute;
+  background-color: white;
+  opacity: 0.8;
+  padding: 4px;
+  height: 40px;
+  cursor: pointer;
+}
+.slick-prev {
+      left: 10px;
+}
+.slick-next {
+  right: 10px;
+}
+
+button:focus {
+      outline: none;
+  }
