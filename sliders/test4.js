@@ -103,23 +103,24 @@
       imageDivClass: '.tutor-image',
       responsiveSettings: [
         {
-          breakpoint: 991,
-          settings: {
-            slidesToShow: 3
+            breakpoint: 991,
+            settings: {
+              slidesToShow: 3
+            }
+          },
+          {
+            breakpoint: 767,
+            settings: {
+              slidesToShow: 2,
+              arrows: true
+            }
+          },
+          {
+            breakpoint: 250,
+            settings: {
+              slidesToShow: 1
+            }
           }
-        },
-        {
-          breakpoint: 767,
-          settings: {
-            slidesToShow: 2
-          }
-        },
-        {
-          breakpoint: 480,
-          settings: {
-            slidesToShow: 1
-          }
-        }
       ]
     });
     // Carousel 2
@@ -128,23 +129,24 @@
       cmsItem: '.testimonial-item',
       imageDivClass: '.testimonial',
       responsiveSettings: [
-        {
-          breakpoint: 991,
-          settings: {
-            slidesToShow: 3
-          }
-        },
-        {
-          breakpoint: 767,
-          settings: {
+    {
+        breakpoint: 991,
+        settings: {
             slidesToShow: 2
-          }
+        }
         },
         {
-          breakpoint: 480,
-          settings: {
+        breakpoint: 767,
+        settings: {
+            slidesToShow: 1,
+            arrows: true
+        }
+        },
+        {
+        breakpoint: 250,
+        settings: {
             slidesToShow: 1
-          }
+        }
         }
       ]
     });
