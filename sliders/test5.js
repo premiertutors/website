@@ -10,10 +10,10 @@
 // Core function with default settings
 function initializeCarousel(options) {
     var defaultSettings = {
-        targetDiv: '.carousel',
-        cmsItem: '.tutor-item',
-        imageDivClass: '.tutor-image',
-        arrowPlacement: 'side', // New option: 'side' or 'bottom'
+        targetDiv: '.testimonial-carousel',
+        cmsItem: '.testimonial-item',
+        imageDivClass: '.testimonial',
+        arrowPosition: 'side', // New option for arrow position
         responsiveSettings: [
             {
                 breakpoint: 991,
@@ -50,12 +50,10 @@ function initializeCarousel(options) {
     var settings = { ...defaultSettings, ...options };
 
     $(window).on('resize', function() {
-        if (settings.arrowPlacement === 'side') {
-            resizeArrows(settings.targetDiv, settings.cmsItem, settings.imageDivClass);
-        }
+        resizeArrows(settings.targetDiv, settings.cmsItem, settings.imageDivClass, settings.arrowPosition);
     });
 
-    var slickOptions = {
+    $(settings.targetDiv).slick({
         dots: settings.dots,
         accessibility: settings.accessibility,
         autoplay: settings.autoplay,
@@ -68,15 +66,10 @@ function initializeCarousel(options) {
         slidesToScroll: 1,
         prevArrow: settings.prevArrow,
         nextArrow: settings.nextArrow,
+        appendArrows: $(settings.targetDiv),
         appendDots: $(settings.targetDiv),
         responsive: settings.responsiveSettings
-    };
-
-    if (settings.arrowPlacement === 'bottom') {
-        slickOptions.appendArrows = $('<div class="slick-arrow-container">').appendTo(settings.targetDiv);
-    }
-
-    $(settings.targetDiv).slick(slickOptions);
+    });
 
     $(settings.cmsItem).each(function(index, element) {
         var tutorItem = $(this).children();
@@ -85,34 +78,42 @@ function initializeCarousel(options) {
         $(settings.targetDiv).slick('slickAdd', div);
 
         var isLastElement = index == $(settings.cmsItem).length - 1;
-        if (isLastElement && settings.arrowPlacement === 'side') {
-            resizeArrows(settings.targetDiv, settings.cmsItem, settings.imageDivClass);
-        }
+        if (isLastElement) resizeArrows(settings.targetDiv, settings.cmsItem, settings.imageDivClass, settings.arrowPosition);
     });
-
-    if (settings.arrowPlacement === 'bottom') {
-        $(settings.targetDiv).addClass('arrows-bottom');
-    }
 }
 
 // Function to resize arrows
-function resizeArrows(targetDiv, cmsItem, imageDivClass) {
+function resizeArrows(targetDiv, cmsItem, imageDivClass, arrowPosition) {
     var height = $($(targetDiv).find(imageDivClass)[0]).css('height');
     var parsedHeight = parseInt(height, 10);
 
     $(targetDiv).find('.slick-arrow').each(function() {
-        $(this).css('top', (parsedHeight / 2 - 15) + 'px');
+        if (arrowPosition === 'side') {
+            $(this).css({
+                'top': (parsedHeight / 2 - 15) + 'px',
+                'left': '',
+                'right': ''
+            });
+        } else if (arrowPosition === 'bottom') {
+            $(this).css({
+                'top': '',
+                'bottom': '10px',
+                'left': '50%',
+                'right': '50%',
+                'transform': 'translateX(-50%)'
+            });
+        }
     });
 }
 
 // Initialize multiple carousels with different settings
 function initializeCarousels() {
-    // Carousel 1 (Tutors)
+    // Carousel 1
     initializeCarousel({
         targetDiv: '.carousel',
         cmsItem: '.tutor-item',
         imageDivClass: '.tutor-image',
-        arrowPlacement: 'side',
+        arrowPosition: 'side', // Keep arrows on the side
         responsiveSettings: [
             {
                 breakpoint: 991,
@@ -134,13 +135,12 @@ function initializeCarousels() {
             }
         ]
     });
-
-    // Carousel 2 (Testimonials)
+    // Carousel 2
     initializeCarousel({
         targetDiv: '.testimonial-carousel',
         cmsItem: '.testimonial-item',
         imageDivClass: '.testimonial',
-        arrowPlacement: 'bottom',
+        arrowPosition: 'bottom', // Move arrows to the bottom
         speed: 1200,
         responsiveSettings: [
             {
