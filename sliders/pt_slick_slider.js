@@ -10,9 +10,12 @@
   // Core function with default settings
   function initializeCarousel(options) {
     var defaultSettings = {
-      targetDiv: '.carousel',
-      cmsItem: '.tutor-item',
-      imageDivClass: '.tutor-image', // New option for image div class
+        targetDiv: '.testimonial-carousel',
+        cmsItem: '.testimonial-item',
+        imageDivClass: '.testimonial',
+    //     targetDiv: '.carousel',
+    //   cmsItem: '.tutor-item',
+    //   imageDivClass: '.tutor-image', // New option for image div class
       responsiveSettings: [
         {
           breakpoint: 991,
@@ -95,9 +98,9 @@
   function initializeCarousels() {
     // Carousel 1
     initializeCarousel({
-      targetDiv: '.xxxcarousel',
-      cmsItem: '.xxxtutor-item',
-      imageDivClass: '.xxxtutor-image',
+      targetDiv: '.carousel',
+      cmsItem: '.tutor-item',
+      imageDivClass: '.tutor-image',
       responsiveSettings: [
         {
           breakpoint: 991,
