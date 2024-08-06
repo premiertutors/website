@@ -96,7 +96,7 @@
     initializeCarousel({
       targetDiv: '.carousel',
       cmsItem: '.tutor-item',
-      dots: true,
+      dots: false,
       autoplay: false,
       responsiveSettings: [
         {
