@@ -111,8 +111,7 @@
           {
             breakpoint: 767,
             settings: {
-              slidesToShow: 2,
-              arrows: true
+              slidesToShow: 2
             }
           },
           {
@@ -128,6 +127,7 @@
       targetDiv: '.testimonial-carousel',
       cmsItem: '.testimonial-item',
       imageDivClass: '.testimonial',
+      speed: 1200,
       responsiveSettings: [
     {
         breakpoint: 991,
@@ -138,8 +138,7 @@
         {
         breakpoint: 767,
         settings: {
-            slidesToShow: 1,
-            arrows: true
+            slidesToShow: 1
         }
         },
         {
