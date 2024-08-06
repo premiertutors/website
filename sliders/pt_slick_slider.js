@@ -96,8 +96,6 @@
     initializeCarousel({
       targetDiv: '.carousel',
       cmsItem: '.tutor-item',
-      dots: true,
-      autoplay: false,
       responsiveSettings: [
         {
           breakpoint: 991,
