@@ -12,6 +12,7 @@
     var defaultSettings = {
       targetDiv: '.carousel',
       cmsItem: '.tutor-item',
+      imageDivClass: '.tutor-image', // New option for image div class
       responsiveSettings: [
         {
           breakpoint: 991,
@@ -48,7 +49,7 @@
     var settings = { ...defaultSettings, ...options };
   
     $(window).on('resize', function() {
-      resizeArrows(settings.targetDiv, settings.cmsItem);
+      resizeArrows(settings.targetDiv, settings.cmsItem, settings.imageDivClass);
     });
   
     $(settings.targetDiv).slick({
@@ -76,13 +77,13 @@
       $(settings.targetDiv).slick('slickAdd', div);
   
       var isLastElement = index == $(settings.cmsItem).length - 1;
-      if (isLastElement) resizeArrows(settings.targetDiv, settings.cmsItem);
+      if (isLastElement) resizeArrows(settings.targetDiv, settings.cmsItem, settings.imageDivClass);
     });
   }
   
   // Function to resize arrows
-  function resizeArrows(targetDiv, cmsItem) {
-    var height = $($(targetDiv).find('.tutor-image')[0]).css('height');
+  function resizeArrows(targetDiv, cmsItem, imageDivClass) {
+    var height = $($(targetDiv).find(imageDivClass)[0]).css('height');
     var parsedHeight = parseInt(height, 10);
   
     $(targetDiv).find('.slick-arrow').each(function() {
@@ -92,10 +93,11 @@
   
   // Initialize multiple carousels with different settings
   function initializeCarousels() {
-    // Carousel 1 - Could be done with just initializeCarousel() but for demonstration purposes have used full settings here:
+    // Carousel 1
     initializeCarousel({
       targetDiv: '.carousel',
       cmsItem: '.tutor-item',
+      imageDivClass: '.tutor-image',
       responsiveSettings: [
         {
           breakpoint: 991,
@@ -117,9 +119,11 @@
         }
       ]
     });
+    // Carousel 2
     initializeCarousel({
       targetDiv: '.testimonial-carousel',
       cmsItem: '.testimonial-item',
+      imageDivClass: '.testimonial',
       responsiveSettings: [
         {
           breakpoint: 991,
@@ -141,4 +145,5 @@
         }
       ]
     });
-}
+  }
+  
