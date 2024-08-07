@@ -18,7 +18,7 @@ table {
   cursor: pointer;
 }
 .slick-prev {
-      left: 10px;
+  left: 10px;
 }
 .slick-next {
   right: 10px;
@@ -27,3 +27,7 @@ table {
 button:focus {
       outline: none;
   }
+
+.slick-dots {
+    display: none !important;
+}
