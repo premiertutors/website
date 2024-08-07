@@ -98,8 +98,8 @@ function resizeArrows(targetDiv, cmsItem, imageDivClass, arrowPosition) {
             $(this).css({
                 'top': '',
                 'bottom': '10px',
-                'left': '50%',
-                'right': '50%',
+                'left': $(this).hasClass('slick-prev') ? 'calc(50% - 30px)' : 'calc(50% + 30px)',
+                'right': '',
                 'transform': 'translateX(-50%)'
             });
         }
@@ -141,7 +141,7 @@ function initializeCarousels() {
         cmsItem: '.testimonial-item',
         imageDivClass: '.testimonial',
         arrowPosition: 'bottom', // Move arrows to the bottom
-        speed: 600,
+        speed: 1200,
         autoplaySpeed: 10000,
         responsiveSettings: [
             {
